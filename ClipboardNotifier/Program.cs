@@ -6,11 +6,6 @@ namespace ClipboardNotifier
     {
         static void Main()
         {
-            new Program();
-        }
-
-        public Program()
-        {
             Console.WriteLine("Press [RETURN] to quit...");
 
             var clipboardObserver = new ClipboardObserver();
