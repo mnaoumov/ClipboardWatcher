@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace JLorek.Samples.ClipboardObserver
+namespace ClipboardNotifier
 {
     public partial class ClipboardObserverForm : Form
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace JLorek.Samples.ClipboardObserver
+namespace ClipboardNotifier
 {
     class User32
     {

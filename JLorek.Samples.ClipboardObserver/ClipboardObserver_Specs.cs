@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
-using JLorek.Samples.ClipboardObserver;
 using Machine.Specifications;
 
-namespace Freemium.TubeBox.LinkGrabber
+namespace ClipboardNotifier
 {
     internal class when_i_use_the_ClipboardObserver
     {

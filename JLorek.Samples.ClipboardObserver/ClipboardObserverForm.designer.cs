@@ -1,4 +1,4 @@
-﻿namespace JLorek.Samples.ClipboardObserver
+﻿namespace ClipboardNotifier
 {
     partial class ClipboardObserverForm
     {

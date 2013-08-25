@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JLorek.Samples.ClipboardObserver
+namespace ClipboardNotifier
 {
     class Program
     {
