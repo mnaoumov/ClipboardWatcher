@@ -14,7 +14,7 @@ namespace ClipboardObserver
             HideForm();
             RegisterClipboardViewer();
             ClipboardTextChanged += clipboardObserver.OnClipboardTextChanged;
-            clipboardObserver.Disposed += Dispose;
+            clipboardObserver.Disposed += () => Invoke(new Action(Dispose));
             Disposed += (sender, args) => UnregisterClipboardViewer();
             Application.Run(this);
         }
