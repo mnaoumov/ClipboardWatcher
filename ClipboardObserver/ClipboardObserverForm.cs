@@ -14,6 +14,8 @@ namespace ClipboardObserver
             HideForm();
             RegisterClipboardViewer();
             ClipboardTextChanged += clipboardObserver.OnClipboardTextChanged;
+            clipboardObserver.Disposed += Dispose;
+            Disposed += (sender, args) => UnregisterClipboardViewer();
             Application.Run(this);
         }
 
@@ -32,8 +34,6 @@ namespace ClipboardObserver
                 User32.AddClipboardFormatListener(Handle);
             else
                 _nextClipboardViewer = User32.SetClipboardViewer(Handle);
-
-            Closed += (sender, args) => UnregisterClipboardViewer();
         }
 
         private void UnregisterClipboardViewer()
@@ -85,5 +85,7 @@ namespace ClipboardObserver
             if (Clipboard.ContainsText())
                 ClipboardTextChanged(Clipboard.GetText());
         }
+
+
     }
 }

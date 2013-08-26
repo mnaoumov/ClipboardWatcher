@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace ClipboardObserver
 {
-    internal class ClipboardObserver
+    internal class ClipboardObserver : IDisposable
     {
         private readonly Thread _formThread;
         private ClipboardObserverForm _observerForm;
@@ -24,14 +24,18 @@ namespace ClipboardObserver
 
         ~ClipboardObserver()
         {
-            if (_observerForm != null)
-                _observerForm.Close();
+            Dispose();
+        }
 
+        public void Dispose()
+        {
+            Disposed();
             if (_formThread != null && _formThread.IsAlive)
                 _formThread.Abort();
         }
 
         public event Action<string> ClipboardTextChanged = delegate { };
+        public event Action Disposed = delegate { }; 
 
         public void OnClipboardTextChanged(string text)
         {
