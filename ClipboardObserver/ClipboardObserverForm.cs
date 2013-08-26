@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ClipboardNotifier
+namespace ClipboardObserver
 {
     public partial class ClipboardObserverForm : Form
     {

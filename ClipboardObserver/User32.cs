@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ClipboardNotifier
+namespace ClipboardObserver
 {
     class User32
     {

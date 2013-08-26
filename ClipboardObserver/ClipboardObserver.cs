@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ClipboardNotifier
+namespace ClipboardObserver
 {
     class ClipboardObserver
     {

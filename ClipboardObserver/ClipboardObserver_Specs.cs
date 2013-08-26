@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Machine.Specifications;
 
-namespace ClipboardNotifier
+namespace ClipboardObserver
 {
     internal class when_i_use_the_ClipboardObserver
     {

@@ -1,4 +1,4 @@
-﻿namespace ClipboardNotifier
+﻿namespace ClipboardObserver
 {
     partial class ClipboardObserverForm
     {
