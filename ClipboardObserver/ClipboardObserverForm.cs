@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ClipboardObserver.Win32.Enums;
+using ClipboardObserver.Win32.Libs;
+using Message = System.Windows.Forms.Message;
 
 namespace ClipboardObserver
 {
     public partial class ClipboardObserverForm : Form
     {
-        private IntPtr _nextClipboardViewer;
-
         internal ClipboardObserverForm(ClipboardObserver clipboardObserver)
         {
             InitializeComponent();
@@ -30,47 +31,19 @@ namespace ClipboardObserver
 
         private void RegisterClipboardViewer()
         {
-            if (IsClipboardFormatListenerAvailiable())
-                User32.AddClipboardFormatListener(Handle);
-            else
-                _nextClipboardViewer = User32.SetClipboardViewer(Handle);
+            User32.AddClipboardFormatListener(Handle);
         }
 
         private void UnregisterClipboardViewer()
         {
-            if (IsClipboardFormatListenerAvailiable())
-                User32.RemoveClipboardFormatListener(Handle);
-            else
-                User32.ChangeClipboardChain(Handle, _nextClipboardViewer);
-        }
-
-        /// <summary>
-        ///     http://stackoverflow.com/questions/2819934/detect-windows-7-in-net
-        /// </summary>
-        private bool IsClipboardFormatListenerAvailiable()
-        {
-            return Environment.OSVersion.Version.Major >= 6;
+            User32.RemoveClipboardFormatListener(Handle);
         }
 
         protected override void WndProc(ref Message m)
         {
-            switch ((User32.Message) m.Msg)
+            switch ((WM) m.Msg)
             {
-                case User32.Message.WM_DRAWCLIPBOARD:
-                    ClipboardChanged();
-
-                    User32.SendMessage(
-                        _nextClipboardViewer, m.Msg, m.WParam, m.LParam);
-                    break;
-
-                case User32.Message.WM_CHANGECBCHAIN:
-                    if (m.WParam == _nextClipboardViewer)
-                        _nextClipboardViewer = m.LParam;
-                    else
-                        User32.SendMessage(_nextClipboardViewer, m.Msg, m.WParam, m.LParam);
-                    break;
-
-                case User32.Message.WM_CLIPBOARDUPDATE:
+                case WM.WM_CLIPBOARDUPDATE:
                     ClipboardChanged();
                     break;
 
@@ -85,7 +58,5 @@ namespace ClipboardObserver
             if (Clipboard.ContainsText())
                 ClipboardTextChanged(Clipboard.GetText());
         }
-
-
     }
 }
