@@ -8,11 +8,13 @@ namespace ClipboardObserver
     {
         private IntPtr _nextClipboardViewer;
 
-        internal ClipboardObserverForm()
+        internal ClipboardObserverForm(ClipboardObserver clipboardObserver)
         {
             InitializeComponent();
             HideForm();
             RegisterClipboardViewer();
+            ClipboardTextChanged += clipboardObserver.OnClipboardTextChanged;
+            Application.Run(this);
         }
 
         public event Action<string> ClipboardTextChanged = delegate { };

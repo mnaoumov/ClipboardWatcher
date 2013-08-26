@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace ClipboardObserver
 {
@@ -13,9 +12,7 @@ namespace ClipboardObserver
         {
             _formThread = new Thread(() =>
                                      {
-                                         _observerForm = new ClipboardObserverForm();
-                                         _observerForm.ClipboardTextChanged += text => ClipboardTextChanged(text);
-                                         Application.Run(_observerForm);
+                                         _observerForm = new ClipboardObserverForm(this);
                                      })
                           {
                               IsBackground = true
@@ -35,5 +32,10 @@ namespace ClipboardObserver
         }
 
         public event Action<string> ClipboardTextChanged = delegate { };
+
+        public void OnClipboardTextChanged(string text)
+        {
+            ClipboardTextChanged(text);
+        }
     }
 }
