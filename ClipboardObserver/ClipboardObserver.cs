@@ -6,14 +6,13 @@ namespace ClipboardObserver
     internal class ClipboardObserver : IDisposable
     {
         private readonly Thread _formThread;
-        private ClipboardObserverForm _observerForm;
         private bool _disposed;
 
         public ClipboardObserver()
         {
             _formThread = new Thread(() =>
                                      {
-                                         _observerForm = new ClipboardObserverForm(this);
+                                         new ClipboardObserverForm(this);
                                      })
                           {
                               IsBackground = true
