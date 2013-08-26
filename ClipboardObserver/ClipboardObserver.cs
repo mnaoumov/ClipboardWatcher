@@ -4,24 +4,23 @@ using System.Windows.Forms;
 
 namespace ClipboardObserver
 {
-    class ClipboardObserver
+    internal class ClipboardObserver
     {
-        private ClipboardObserverForm _observerForm;
         private readonly Thread _formThread;
+        private ClipboardObserverForm _observerForm;
 
         public ClipboardObserver()
         {
             _formThread = new Thread(() =>
-            {
-                _observerForm = new ClipboardObserverForm();
-                _observerForm.ClipboardTextChanged += text =>
-                {
-                    ClipboardTextChanged(text);
-                };
-                Application.Run(_observerForm);
-            });
+                                     {
+                                         _observerForm = new ClipboardObserverForm();
+                                         _observerForm.ClipboardTextChanged += text => ClipboardTextChanged(text);
+                                         Application.Run(_observerForm);
+                                     })
+                          {
+                              IsBackground = true
+                          };
 
-            _formThread.IsBackground = true;
             _formThread.SetApartmentState(ApartmentState.STA);
             _formThread.Start();
         }
@@ -29,14 +28,10 @@ namespace ClipboardObserver
         ~ClipboardObserver()
         {
             if (_observerForm != null)
-            {
                 _observerForm.Close();
-            }
 
-            if ((_formThread != null) && (_formThread.IsAlive))
-            {
+            if (_formThread != null && _formThread.IsAlive)
                 _formThread.Abort();
-            }
         }
 
         public event Action<string> ClipboardTextChanged = delegate { };
