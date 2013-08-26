@@ -7,6 +7,7 @@ namespace ClipboardObserver
     {
         private readonly Thread _formThread;
         private ClipboardObserverForm _observerForm;
+        private bool _disposed;
 
         public ClipboardObserver()
         {
@@ -29,9 +30,13 @@ namespace ClipboardObserver
 
         public void Dispose()
         {
+            if (_disposed)
+                return;
             Disposed();
             if (_formThread != null && _formThread.IsAlive)
                 _formThread.Abort();
+            _disposed = true;
+            GC.SuppressFinalize(this);
         }
 
         public event Action<string> ClipboardTextChanged = delegate { };
