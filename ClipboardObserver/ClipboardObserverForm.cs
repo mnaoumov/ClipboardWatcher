@@ -7,11 +7,10 @@ using Message = System.Windows.Forms.Message;
 
 namespace ClipboardObserver
 {
-    public partial class ClipboardObserverForm : Form
+    public class ClipboardObserverForm : Form
     {
         internal ClipboardObserverForm(ClipboardObserver clipboardObserver)
         {
-            InitializeComponent();
             HideForm();
             RegisterClipboardViewer();
             ClipboardTextChanged += clipboardObserver.OnClipboardTextChanged;
