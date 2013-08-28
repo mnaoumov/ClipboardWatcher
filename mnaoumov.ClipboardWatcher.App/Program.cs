@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace mnaoumov.ClipboardWatcher
+namespace mnaoumov.ClipboardWatcher.App
 {
-    internal class Program
+    class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
             Console.WriteLine("Press [RETURN] to quit...");
 
@@ -12,7 +12,7 @@ namespace mnaoumov.ClipboardWatcher
             {
                 clipboardWatcher.ClipboardTextChanged += text => Console.WriteLine(string.Format("Text arrived @ clipboard: {0}", text));
                 Console.ReadLine();
-            }
+            } 
         }
     }
 }
