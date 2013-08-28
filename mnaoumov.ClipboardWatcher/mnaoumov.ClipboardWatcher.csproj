@@ -8,10 +8,11 @@
     <ProjectGuid>{F4C7B287-AD27-4CE5-9A4C-80616F986993}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClipboardObserver</RootNamespace>
-    <AssemblyName>ClipboardObserver</AssemblyName>
+    <RootNamespace>mnaoumov.ClipboardWatcher</RootNamespace>
+    <AssemblyName>mnaoumov.ClipboardWatcher</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -43,8 +44,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClipboardObserver.cs" />
-    <Compile Include="ClipboardObserverForm.cs">
+    <Compile Include="ClipboardWatcher.cs" />
+    <Compile Include="ClipboardWatcherForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -61,6 +62,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using ClipboardObserver.Win32.Enums;
-using ClipboardObserver.Win32.Libs;
-using Message = System.Windows.Forms.Message;
+using mnaoumov.ClipboardWatcher.Win32.Enums;
+using mnaoumov.ClipboardWatcher.Win32.Libs;
 
-namespace ClipboardObserver
+namespace mnaoumov.ClipboardWatcher
 {
-    public class ClipboardObserverForm : Form
+    public class ClipboardWatcherForm : Form
     {
-        internal ClipboardObserverForm(ClipboardObserver clipboardObserver)
+        internal ClipboardWatcherForm(ClipboardWatcher clipboardWatcher)
         {
             HideForm();
             RegisterClipboardViewer();
-            ClipboardTextChanged += clipboardObserver.OnClipboardTextChanged;
-            clipboardObserver.Disposed += () => Invoke(new Action(Dispose));
+            ClipboardTextChanged += clipboardWatcher.OnClipboardTextChanged;
+            clipboardWatcher.Disposed += () => Invoke(new Action(Dispose));
             Disposed += (sender, args) => UnregisterClipboardViewer();
             Application.Run(this);
         }

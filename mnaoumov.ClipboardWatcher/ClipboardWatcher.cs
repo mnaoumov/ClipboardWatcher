@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Threading;
 
-namespace ClipboardObserver
+namespace mnaoumov.ClipboardWatcher
 {
-    internal class ClipboardObserver : IDisposable
+    internal class ClipboardWatcher : IDisposable
     {
         private readonly Thread _formThread;
         private bool _disposed;
 
-        public ClipboardObserver()
+        public ClipboardWatcher()
         {
             _formThread = new Thread(() =>
                                      {
-                                         new ClipboardObserverForm(this);
+                                         new ClipboardWatcherForm(this);
                                      })
                           {
                               IsBackground = true
@@ -22,7 +22,7 @@ namespace ClipboardObserver
             _formThread.Start();
         }
 
-        ~ClipboardObserver()
+        ~ClipboardWatcher()
         {
             Dispose();
         }

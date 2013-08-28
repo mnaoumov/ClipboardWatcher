@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ClipboardObserver.Win32.Libs
+namespace mnaoumov.ClipboardWatcher.Win32.Libs
 {
     /// <summary>
     /// P/Invoke functions from user32.dll.

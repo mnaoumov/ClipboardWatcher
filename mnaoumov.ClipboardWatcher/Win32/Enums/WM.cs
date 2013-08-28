@@ -1,4 +1,4 @@
-namespace ClipboardObserver.Win32.Enums
+namespace mnaoumov.ClipboardWatcher.Win32.Enums
 {
     /// <summary>
     /// Clipboard Notifications
