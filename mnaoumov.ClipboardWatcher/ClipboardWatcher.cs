@@ -3,28 +3,20 @@ using System.Threading;
 
 namespace mnaoumov.ClipboardWatcher
 {
-    internal class ClipboardWatcher : IDisposable
+    public class ClipboardWatcher : IDisposable
     {
-        private readonly Thread _formThread;
-        private bool _disposed;
+        readonly Thread _formThread;
+        bool _disposed;
 
         public ClipboardWatcher()
         {
-            _formThread = new Thread(() =>
-                                     {
-                                         new ClipboardWatcherForm(this);
-                                     })
+            _formThread = new Thread(() => { new ClipboardWatcherForm(this); })
                           {
                               IsBackground = true
                           };
 
             _formThread.SetApartmentState(ApartmentState.STA);
             _formThread.Start();
-        }
-
-        ~ClipboardWatcher()
-        {
-            Dispose();
         }
 
         public void Dispose()
@@ -38,8 +30,13 @@ namespace mnaoumov.ClipboardWatcher
             GC.SuppressFinalize(this);
         }
 
+        ~ClipboardWatcher()
+        {
+            Dispose();
+        }
+
         public event Action<string> ClipboardTextChanged = delegate { };
-        public event Action Disposed = delegate { }; 
+        public event Action Disposed = delegate { };
 
         public void OnClipboardTextChanged(string text)
         {

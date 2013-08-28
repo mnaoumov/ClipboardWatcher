@@ -8,7 +8,7 @@ namespace mnaoumov.ClipboardWatcher
 {
     public class ClipboardWatcherForm : Form
     {
-        internal ClipboardWatcherForm(ClipboardWatcher clipboardWatcher)
+        public ClipboardWatcherForm(ClipboardWatcher clipboardWatcher)
         {
             HideForm();
             RegisterClipboardViewer();
@@ -20,19 +20,19 @@ namespace mnaoumov.ClipboardWatcher
 
         public event Action<string> ClipboardTextChanged = delegate { };
 
-        private void HideForm()
+        void HideForm()
         {
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
             Load += (sender, args) => { Size = new Size(0, 0); };
         }
 
-        private void RegisterClipboardViewer()
+        void RegisterClipboardViewer()
         {
             User32.AddClipboardFormatListener(Handle);
         }
 
-        private void UnregisterClipboardViewer()
+        void UnregisterClipboardViewer()
         {
             User32.RemoveClipboardFormatListener(Handle);
         }
@@ -51,7 +51,7 @@ namespace mnaoumov.ClipboardWatcher
             }
         }
 
-        private void ClipboardChanged()
+        void ClipboardChanged()
         {
             if (Clipboard.ContainsText())
                 ClipboardTextChanged(Clipboard.GetText());

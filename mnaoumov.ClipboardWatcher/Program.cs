@@ -2,7 +2,7 @@
 
 namespace mnaoumov.ClipboardWatcher
 {
-    class Program
+    internal class Program
     {
         static void Main()
         {
@@ -13,7 +13,6 @@ namespace mnaoumov.ClipboardWatcher
                 clipboardWatcher.ClipboardTextChanged += text => Console.WriteLine(string.Format("Text arrived @ clipboard: {0}", text));
                 Console.ReadLine();
             }
-
         }
     }
 }
