@@ -11,10 +11,10 @@ namespace mnaoumov.ClipboardWatcher
         public ClipboardWatcherForm(ClipboardWatcher clipboardWatcher)
         {
             HideForm();
-            RegisterClipboardViewer();
+            RegisterWin32();
             ClipboardTextChanged += clipboardWatcher.OnClipboardTextChanged;
             clipboardWatcher.Disposed += () => Invoke(new Action(Dispose));
-            Disposed += (sender, args) => UnregisterClipboardViewer();
+            Disposed += (sender, args) => UnregisterWin32();
             Application.Run(this);
         }
 
@@ -27,12 +27,12 @@ namespace mnaoumov.ClipboardWatcher
             Load += (sender, args) => { Size = new Size(0, 0); };
         }
 
-        void RegisterClipboardViewer()
+        void RegisterWin32()
         {
             User32.AddClipboardFormatListener(Handle);
         }
 
-        void UnregisterClipboardViewer()
+        void UnregisterWin32()
         {
             User32.RemoveClipboardFormatListener(Handle);
         }
