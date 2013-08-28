@@ -12,7 +12,7 @@ Trap { throw $_ }
 
 function Register-WatcherType
 {
-    Add-Type -ReferencedAssemblies System.Windows.Forms, System.Drawing -TypeDefinition `
+    Add-Type -ReferencedAssemblies System.Windows.Forms, System.Drawing -Language CSharpVersion3 -TypeDefinition `
 @"
 using System;
 using System.Drawing;
