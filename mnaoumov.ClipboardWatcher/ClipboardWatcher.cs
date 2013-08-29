@@ -81,7 +81,8 @@ public class ClipboardWatcherForm : Form
 
     void UnregisterWin32()
     {
-        User32.RemoveClipboardFormatListener(Handle);
+        if (IsHandleCreated)
+            User32.RemoveClipboardFormatListener(Handle);
     }
 
     protected override void WndProc(ref Message m)
