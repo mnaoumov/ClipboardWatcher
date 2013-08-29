@@ -176,5 +176,5 @@ Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action `
 
 Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action `
     {
-        $watcher.Dispose()
+        Unregister-ClipboardWatcher
     }
