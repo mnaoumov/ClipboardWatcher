@@ -17,7 +17,7 @@ function Register-ClipboardWatcher
         Register-ClipboardWatcherType
         $Global:ClipboardWatcher = New-Object ClipboardWatcher
 
-        Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action `
+        Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action `
         {
             Unregister-ClipboardWatcher
         }
