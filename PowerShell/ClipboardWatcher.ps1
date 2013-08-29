@@ -152,3 +152,8 @@ Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action `
 
         Write-Host "Text arrived @ clipboard: $text"
     }
+
+Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action `
+    {
+        $watcher.Dispose()
+    }
