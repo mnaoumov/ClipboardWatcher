@@ -133,3 +133,14 @@ public class User32
 }
 
 Register-WatcherType
+
+$watcher = New-Object ClipboardWatcher
+Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action `
+    {
+        param
+        (
+            [string] $text
+        )
+
+        Write-Host "Text arrived @ clipboard: $text"
+    }
