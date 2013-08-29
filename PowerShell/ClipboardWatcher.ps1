@@ -16,6 +16,11 @@ function Register-ClipboardWatcher
     {
         Register-ClipboardWatcherType
         $Global:ClipboardWatcher = New-Object ClipboardWatcher
+
+        Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action `
+        {
+            Unregister-ClipboardWatcher
+        }
     }
 
     return $Global:ClipboardWatcher
@@ -172,9 +177,4 @@ Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action `
         )
 
         Write-Host "Text arrived @ clipboard: $text"
-    }
-
-Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action `
-    {
-        Unregister-ClipboardWatcher
     }
