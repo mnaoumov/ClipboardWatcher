@@ -168,8 +168,18 @@ public class User32
 
 }
 
-$watcher = Register-ClipboardWatcher
-Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action `
+function Register-ClipboardTextChangedEvent
+{
+    param
+    (
+        [ScriptBlock] $Action
+    )
+
+    $watcher = Register-ClipboardWatcher
+    Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action $Action
+}
+
+Register-ClipboardTextChangedEvent -Action `
     {
         param
         (
