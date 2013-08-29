@@ -10,7 +10,29 @@ Set-StrictMode -Version Latest
 function PSScriptRoot { $MyInvocation.ScriptName | Split-Path }
 Trap { throw $_ }
 
-function Register-WatcherType
+function Register-ClipboardWatcher
+{
+    if (-not (Test-Path Variable:Global:ClipboardWatcher))
+    {
+        Register-ClipboardWatcherType
+        $Global:ClipboardWatcher = New-Object ClipboardWatcher
+    }
+
+    return $Global:ClipboardWatcher
+}
+
+function Unregister-ClipboardWatcher
+{
+    if (Test-Path Variable:Global:ClipboardWatcher)
+    {
+        $Global:ClipboardWatcher.Dispose();
+        Remove-Variable ClipboardWatcher -Scope Global
+    }
+
+    return $Global:ClipboardWatcher
+}
+
+function Register-ClipboardWatcherType
 {
     Add-Type -ReferencedAssemblies System.Windows.Forms, System.Drawing -Language CSharpVersion3 -TypeDefinition `
 @"
@@ -140,9 +162,7 @@ public class User32
 
 }
 
-Register-WatcherType
-
-$watcher = New-Object ClipboardWatcher
+$watcher = Register-ClipboardWatcher
 Register-ObjectEvent $watcher -EventName ClipboardTextChanged -Action `
     {
         param
