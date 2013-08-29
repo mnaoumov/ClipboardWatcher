@@ -13,9 +13,17 @@ namespace mnaoumov.ClipboardWatcher
             HideForm();
             RegisterWin32();
             ClipboardTextChanged += clipboardWatcher.OnClipboardTextChanged;
-            clipboardWatcher.Disposed += () => Invoke(new Action(Dispose));
+            clipboardWatcher.Disposed += () => InvokeIfRequired(Dispose);
             Disposed += (sender, args) => UnregisterWin32();
             Application.Run(this);
+        }
+
+        void InvokeIfRequired(Action action)
+        {
+            if (InvokeRequired)
+                Invoke(action);
+            else
+                action();
         }
 
         public event Action<string> ClipboardTextChanged = delegate { };
